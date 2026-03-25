@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Nove | Personal Shopper Imobiliário</title>
+  <meta
+    name="description"
+    content="House Nove: experiência imobiliária com curadoria, segurança, atendimento humano e jornada assistida."
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hnPurple: "#572580",
+            hnOrange: "#ff9600",
+            hnDark: "#1a0d24",
+          },
+          fontFamily: {
+            premium: ["Montserrat", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --h9-purple: #572580;
+      --h9-orange: #ff9600;
+      --h9-dark: #1a0d24;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(0, 0, 0, 0.2);
+      --input-bg-focus: rgba(0, 0, 0, 0.35);
+      --soft-text: rgba(255, 255, 255, 0.78);
+      --muted-text: rgba(255, 255, 255, 0.55);
+      --orange-shadow: 0 8px 25px rgba(255, 150, 0, 0.18);
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: #fff;
+      background-color: var(--h9-purple);
+      background-image:
+        linear-gradient(rgba(87, 37, 128, 0.72), rgba(87, 37, 128, 0.72)),
+        url("POST-HOUSE-P-BANNER.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      body { background-attachment: scroll; }
+    }
+
+    .hidden-section { display: none !important; }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.82);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .input-h9,
+    .select-h9,
+    .textarea-h9 {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: var(--input-bg);
+      color: #fff;
+      outline: none;
+      transition: 0.25s ease;
+      appearance: none;
+    }
+
+    .input-h9::placeholder,
+    .textarea-h9::placeholder {
+      color: rgba(255,255,255,0.48);
+    }
+
+    .input-h9:focus,
+    .select-h9:focus,
+    .textarea-h9:focus {
+      border-color: var(--h9-orange);
+      background: var(--input-bg-focus);
+      box-shadow: 0 0 0 4px rgba(255,150,0,0.12);
+    }
+
+    .textarea-h9 {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn-h9 {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 22px;
+      border-radius: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--h9-orange);
+      color: #1a0d24;
+      box-shadow: var(--orange-shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--h9-orange);
+      color: var(--h9-orange);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,150,0,0.06);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.86);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1380px;
+      padding: 0 24px 96px;
+    }
+
+    .top-left-back {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 60;
+      display: none;
+    }
+
+    .top-right-actions {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 60;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill-btn {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-2px);
+      color: var(--h9-orange);
+    }
+
+    .pill-btn.orange {
+      background: var(--h9-orange);
+      color: #1a0d24;
+      border-color: transparent;
+    }
+
+    .pill-btn.orange:hover {
+      color: #1a0d24;
+      filter: brightness(1.04);
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid var(--h9-orange);
+      background-image: url("Gabi-removebg-preview.png");
+      background-color: var(--h9-purple);
+      background-size: 110%;
+      background-position: top center;
+      background-repeat: no-repeat;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.42);
+      z-index: 80;
+      transition: transform 0.25s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.06);
+    }
+
+    .floating-whatsapp-badge {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .portfolio-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sticky-panel {
+      position: sticky;
+      top: 92px;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.82);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .property-card-image {
+      height: 210px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,150,0,0.08)),
+        rgba(0,0,0,0.14);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .property-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.84);
+      text-transform: uppercase;
+    }
+
+    .map-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(255,150,0,0.12), transparent 18%),
+        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.18));
+    }
+
+    .map-svg {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      display: block;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 20px 22px;
+      text-align: left;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: rgba(255,255,255,0.76);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .faq-answer-inner {
+      padding: 0 22px 22px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .footer-title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .footer-link {
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+      color: rgba(255,255,255,0.74);
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--h9-orange);
+    }
+
+    .footer-legal {
+      color: rgba(255,255,255,0.52);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .trust-footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .social-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .social-link {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .social-link:hover {
+      color: var(--h9-orange);
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .notice-box {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,150,0,0.08);
+      border: 1px dashed rgba(255,150,0,0.32);
+      color: rgba(255,255,255,0.86);
+      font-size: 13px;
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .portfolio-layout,
+      .footer-grid,
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-footer-row,
+      .trust-bar,
+      .social-bar {
+        justify-content: center;
+      }
+
+      .top-right-actions {
+        left: 12px;
+        right: 12px;
+        justify-content: center;
+      }
+
+      .top-left-back {
+        left: 12px;
+        top: 76px;
+      }
+
+      .sticky-panel {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center">
+
+  <button id="globalBackBtn" class="top-left-back pill-btn">
+    <i class="fas fa-arrow-left"></i> Voltar
+  </button>
+
+  <div class="top-right-actions">
+    <button class="pill-btn secondary" data-target="portfolio">
+      <i class="fas fa-search"></i> Buscar imóveis
+    </button>
+    <button class="pill-btn orange" data-target="loginBroker">
+      <i class="fas fa-user-tie"></i> Área do Corretor
+    </button>
+  </div>
+
+  <a
+    href="https://wa.me/5511976022147"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="floating-whatsapp"
+    aria-label="Falar com a House Nove no WhatsApp"
+  >
+    <span class="floating-whatsapp-badge"><i class="fab fa-whatsapp text-white"></i></span>
+  </a>
+
+  <!-- HOME -->
+  <section id="homeSection" class="w-full flex flex-col items-center">
+    <header class="w-full pt-16 pb-12 flex justify-center">
+      <img src="logo vertical 1.png" alt="House Nove" class="h-32 md:h-48 object-contain" />
+    </header>
+
+    <div class="w-full max-w-4xl px-6 mb-16 text-center">
+      <h1 class="font-premium text-2xl md:text-4xl font-black uppercase italic leading-none">
+        Tecnologia imobiliária <span class="text-hnOrange">focada</span> no atendimento de qualidade!
+      </h1>
+    </div>
+
+    <main class="w-full max-w-2xl px-6 pb-12 space-y-10">
+      <section class="glass-card p-8 md:p-12">
+        <span class="section-tag">Proprietários</span>
+        <h2 class="font-premium text-2xl md:text-3xl font-black mb-4 uppercase">Quero vender meu imóvel</h2>
+        <p class="text-white/74 text-sm leading-7 mb-6">
+          Preencha seus dados para a House Nove entrar em contato, analisar o potencial de captação
+          e entender se o seu imóvel faz sentido para o nosso portfólio.
+        </p>
+
+        <form id="sellerLeadForm" class="space-y-4">
+          <input id="sellerNome" type="text" placeholder="Nome Completo" class="input-h9" required />
+          <div class="grid md:grid-cols-2 gap-4">
+            <input id="sellerTelefone" type="tel" placeholder="Telefone" class="input-h9" required />
+            <input id="sellerBairro" type="text" placeholder="Bairro" class="input-h9" required />
+          </div>
+          <input id="sellerEmail" type="email" placeholder="E-mail" class="input-h9" required />
+          <button type="submit" class="btn-h9 btn-primary">Quero vender</button>
+        </form>
+      </section>
+
+      <section class="glass-card p-8 md:p-12">
+        <span class="section-tag">Novo!</span>
+        <h2 class="font-premium text-2xl md:text-3xl font-black mb-4 uppercase">Jornada com PS</h2>
+        <p class="text-white/74 text-sm leading-7 mb-8">
+          Acesso a um portfólio exclusivo e jornada assistida nas maiores proptechs, com o filtro humano,
+          estratégico e curado da House Nove.
+        </p>
+        <button type="button" id="openBuyerFlow" class="btn-h9 btn-outline">Quero comprar</button>
+      </section>
+
+      <section class="glass-card p-8 md:p-12">
+        <span class="section-tag">Poder de Compra</span>
+        <h2 class="font-premium text-2xl md:text-3xl font-black mb-4 uppercase">Descubra quanto pode ser sua casa</h2>
+        <p class="text-white/74 text-sm leading-7 mb-8">
+          Faça aqui sua simulação de financiamento, entenda seu poder de compra com uma estimativa inicial
+          e siga para o próximo passo com apoio humano.
+        </p>
+        <button type="button" id="openSimulatorFlow" class="btn-h9 btn-outline">Simular financiamento</button>
+      </section>
+    </main>
+
+    <section class="w-full flex justify-center px-6 pb-16">
+      <div class="w-64 h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+          <source src="Animação com fundo .mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+  </section>
+
+  <!-- BUYER FORM -->
+  <section id="buyerFormSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-3xl mx-auto glass-card p-8 md:p-10">
+      <span class="section-tag">Personal Shopper</span>
+      <h2 class="font-premium text-3xl md:text-4xl font-black uppercase mb-6">Jornada com PS</h2>
+
+      <form id="buyerLeadForm" class="space-y-4">
+        <input id="buyerNome" type="text" placeholder="Seu Nome" class="input-h9" required />
+        <input id="buyerEmail" type="email" placeholder="Seu E-mail" class="input-h9" required />
+        <input id="buyerCelular" type="tel" placeholder="Seu Celular" class="input-h9" required />
+        <select id="buyerJornada" class="select-h9" required>
+          <option value="">Sua fase atual</option>
+          <option value="inicio">Iniciando agora</option>
+          <option value="pesquisa">Já pesquisando</option>
+          <option value="visitas">Já visitando imóveis</option>
+          <option value="proposta">Pronto para propor</option>
+        </select>
+        <textarea id="buyerObs" class="textarea-h9" placeholder="Conte um pouco do que você procura"></textarea>
+        <button type="submit" class="btn-h9 btn-primary">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- BUYER THANKS -->
+  <section id="buyerThankYouSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-3xl mx-auto glass-card p-8 md:p-12 text-center space-y-6">
+      <span class="section-tag">Recebido</span>
+      <h2 class="font-premium text-3xl md:text-4xl font-black uppercase">Obrigado pelo envio</h2>
+      <p class="text-white/75 leading-7">
+        Sua jornada com Personal Shopper foi registrada com sucesso. Agora vamos te direcionar
+        para a busca inicial de imóveis para você começar a explorar opções alinhadas ao seu momento.
+      </p>
+      <button id="goPortfolioNow" type="button" class="btn-h9 btn-primary max-w-sm mx-auto">
+        Ir para busca de imóveis
+      </button>
+    </div>
+  </section>
+
+  <!-- PODER DE COMPRA -->
+  <section id="simulatorSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-4xl mx-auto glass-card p-8 md:p-10 space-y-8">
+      <div class="text-center space-y-3">
+        <span class="section-tag">Poder de Compra</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Simulação de financiamento</h2>
+        <p class="text-white/75 max-w-3xl mx-auto leading-7">
+          Descubra quanto pode ser sua casa com uma estimativa inicial baseada em renda, entrada e prazo.
+          Esse cálculo é uma referência de viabilidade, não uma promessa de crédito.
+        </p>
+      </div>
+
+      <form id="simulatorForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="simName" type="text" class="input-h9" placeholder="Nome completo" required />
+          <input id="simPhone" type="tel" class="input-h9" placeholder="WhatsApp" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="simEmail" type="email" class="input-h9" placeholder="E-mail" required />
+          <input id="simIncome" type="number" min="0" step="0.01" class="input-h9" placeholder="Renda mensal" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="simDownPayment" type="number" min="0" step="0.01" class="input-h9" placeholder="Valor de entrada" required />
+          <select id="simTerm" class="select-h9" required>
+            <option value="">Prazo desejado</option>
+            <option value="120">120 meses</option>
+            <option value="180">180 meses</option>
+            <option value="240">240 meses</option>
+            <option value="300">300 meses</option>
+            <option value="360">360 meses</option>
+          </select>
+        </div>
+
+        <div id="simulatorResult" class="glass-card p-6 space-y-4 hidden-section">
+          <div>
+            <h3 class="font-premium text-2xl font-black uppercase">Resultado da simulação</h3>
+            <p class="text-white/70 text-sm mt-2">
+              Estimativa inicial para orientar sua jornada de compra e a conversa com o correspondente.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p class="text-white/60 text-xs uppercase tracking-widest">Parcela estimada</p>
+              <p id="resultInstallment" class="text-hnOrange font-black text-xl mt-2">R$ 0,00</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p class="text-white/60 text-xs uppercase tracking-widest">Financiamento estimado</p>
+              <p id="resultFinance" class="text-hnOrange font-black text-xl mt-2">R$ 0,00</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p class="text-white/60 text-xs uppercase tracking-widest">Imóvel estimado</p>
+              <p id="resultProperty" class="text-hnOrange font-black text-xl mt-2">R$ 0,00</p>
+            </div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+            <p id="resultSummary" class="text-white/75 leading-7 text-sm"></p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <button type="submit" class="btn-h9 btn-primary md:max-w-xs">Calcular simulação</button>
+          <button type="button" id="sendSimulatorWhats" class="btn-h9 btn-outline md:max-w-sm hidden-section">Falar com Eduardo</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- LOGIN CORRETOR -->
+  <section id="loginBrokerSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-xl mx-auto glass-card p-8 md:p-10 space-y-6">
+      <div class="text-center">
+        <span class="section-tag">Corretores</span>
+        <h2 class="font-premium text-3xl md:text-4xl font-black uppercase">Login do Corretor</h2>
+        <p class="text-white/70 mt-3">
+          Acesse com e-mail e senha para liberar o CRM e a captação técnica.
+        </p>
+      </div>
+
+      <form id="brokerLoginForm" class="space-y-4">
+        <input id="brokerLoginEmail" type="text" class="input-h9" placeholder="E-mail ou Login" required />
+        <input id="brokerLoginPassword" type="password" class="input-h9" placeholder="Senha" required />
+        <div id="brokerLoginFeedback" class="text-sm text-white/70"></div>
+        <button type="submit" class="btn-h9 btn-primary">Entrar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CRM CORRETOR -->
+  <section id="brokerCRMSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-6xl mx-auto space-y-8">
+      <div class="glass-card p-8 md:p-10">
+        <span class="section-tag">Corretores</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase mb-4">CRM do Corretor</h2>
+        <p class="text-white/75 max-w-3xl leading-7">
+          CRM do corretor com captação, cliente próprio, agenda, proposta e ecossistema educacional.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-card p-8 space-y-5">
+          <span class="section-tag">Ação 01</span>
+          <h3 class="font-premium text-2xl font-black uppercase">Captação Técnica</h3>
+          <p class="text-white/75 leading-7">
+            Formulário fechado para corretores com checklist operacional, QA e descrição H9-AI.
+          </p>
+          <button type="button" data-target="capture" class="btn-h9 btn-primary">Entrar</button>
+        </div>
+
+        <div class="glass-card p-8 space-y-5">
+          <span class="section-tag">Ação 02</span>
+          <h3 class="font-premium text-2xl font-black uppercase">Cliente Próprio</h3>
+          <p class="text-white/75 leading-7">
+            Cadastre leads externos para garantir atribuição do corretor e rastrear agendamentos futuros.
+          </p>
+          <button type="button" data-target="ownClient" class="btn-h9 btn-outline">Abrir</button>
+        </div>
+
+        <div class="glass-card p-8 space-y-5">
+          <span class="section-tag">Ação 03</span>
+          <h3 class="font-premium text-2xl font-black uppercase">Inteligência Imobiliária</h3>
+          <p class="text-white/75 leading-7">
+            Plataforma educacional para corretores House Nove.
+          </p>
+          <a href="https://inteligenciaimobiliaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn-h9 btn-outline">
+            Acessar
+          </a>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass-card p-8 space-y-4">
+          <h3 class="font-premium text-2xl font-black uppercase">Minha Agenda</h3>
+          <p class="text-white/75">Registre visitas, observações e liberação de proposta.</p>
+          <button type="button" data-target="agenda" class="btn-h9 btn-ghost">Abrir agenda</button>
+        </div>
+
+        <div class="glass-card p-8 space-y-4">
+          <h3 class="font-premium text-2xl font-black uppercase">Formalizar Proposta</h3>
+          <p class="text-white/75">Liberado somente após o registro da visita.</p>
+          <button type="button" id="openProposalFromCRM" class="btn-h9 btn-ghost">Abrir proposta</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPTACAO TECNICA -->
+  <section id="captureSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-6xl mx-auto glass-card p-8 md:p-10 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <span class="section-tag">Captação</span>
+          <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Cadastrar Imóvel</h2>
+          <p class="text-white/75 mt-2">
+            Formulário técnico de captação preparado para operação e automação com Make/Airtable.
+          </p>
+        </div>
+      </div>
+
+      <form id="captureForm" class="space-y-8">
+        <div class="glass-card p-5">
+          <p class="text-sm uppercase tracking-widest text-white/70 mb-3">QA</p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/82">
+            <label class="inline-flex items-center gap-2"><input type="radio" name="qaStatus" value="por_nos" /> Cadastrado no QA por nós</label>
+            <label class="inline-flex items-center gap-2"><input type="radio" name="qaStatus" value="outro_corretor" /> Cadastrado no QA por outro corretor</label>
+            <label class="inline-flex items-center gap-2"><input type="radio" name="qaStatus" value="nao" /> Não cadastrado no QA</label>
+          </div>
+          <div id="qaReminder" class="notice-box mt-4">
+            Lembrete: subir cadastro no QA antes de seguir a operação.
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <input id="captureCep" type="text" class="input-h9" placeholder="CEP" required />
+          <input id="captureAddressNumber" type="text" class="input-h9" placeholder="Número" required />
+          <input id="captureDistrict" type="text" class="input-h9" placeholder="Bairro" required />
+          <input id="captureOwner" type="text" class="input-h9" placeholder="Nome do proprietário" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <input id="captureOwnerPhone" type="tel" class="input-h9" placeholder="Telefone do proprietário" required />
+          <input id="captureType" type="text" class="input-h9" placeholder="Tipo do imóvel" />
+          <input id="captureArea" type="text" class="input-h9" placeholder="Metragem" />
+          <input id="captureBedrooms" type="number" class="input-h9" placeholder="Dormitórios" />
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <input id="captureSuites" type="number" class="input-h9" placeholder="Suítes" />
+          <input id="captureParking" type="number" class="input-h9" placeholder="Vagas" />
+          <input id="capturePrice" type="text" class="input-h9" placeholder="Valor de venda" />
+          <input id="captureCondo" type="text" class="input-h9" placeholder="Condomínio" />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="captureIptu" type="text" class="input-h9" placeholder="IPTU" />
+          <input id="captureAmenities" type="text" class="input-h9" placeholder="Lazer completo / condomínio" />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <label class="text-white/70 text-sm uppercase tracking-widest">Checklist de mídia</label>
+            <div class="grid grid-cols-2 gap-3 text-sm text-white/80">
+              <label><input type="checkbox" name="captureMedia" value="fachada"> Fachada</label>
+              <label><input type="checkbox" name="captureMedia" value="sala"> Sala</label>
+              <label><input type="checkbox" name="captureMedia" value="quartos"> Quartos</label>
+              <label><input type="checkbox" name="captureMedia" value="cozinha"> Cozinha</label>
+              <label><input type="checkbox" name="captureMedia" value="banheiros"> Banheiros</label>
+              <label><input type="checkbox" name="captureMedia" value="varanda"> Varanda</label>
+              <label><input type="checkbox" name="captureMedia" value="video"> Vídeo</label>
+              <label><input type="checkbox" name="captureMedia" value="planta"> Planta</label>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <label class="text-white/70 text-sm uppercase tracking-widest">Descrição comercial</label>
+            <textarea id="captureDescription" class="textarea-h9" placeholder="Descreva o imóvel para a geração de texto comercial."></textarea>
+            <button type="button" id="generateDescriptionBtn" class="btn-h9 btn-outline">Gerar Descrição H9-AI</button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <button type="submit" class="btn-h9 btn-primary md:max-w-xs">Enviar captação</button>
+          <button type="button" data-target="brokerCRM" class="btn-h9 btn-ghost md:max-w-xs">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CLIENTE PROPRIO -->
+  <section id="ownClientSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-4xl mx-auto glass-card p-8 md:p-10 space-y-8">
+      <div>
+        <span class="section-tag">CRM</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Cliente Próprio</h2>
+        <p class="text-white/75 mt-2">
+          Cadastre leads externos para garantir atribuição do corretor quando o cliente voltar ao site sozinho.
+        </p>
+      </div>
+
+      <form id="ownClientForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="ownClientName" type="text" class="input-h9" placeholder="Nome completo" required />
+          <input id="ownClientEmail" type="email" class="input-h9" placeholder="E-mail" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="ownClientPhone" type="tel" class="input-h9" placeholder="Celular / WhatsApp" required />
+          <input id="ownClientOrigin" type="text" class="input-h9" placeholder="Origem do lead" />
+        </div>
+
+        <textarea id="ownClientNotes" class="textarea-h9" placeholder="Observações comerciais e contexto do cliente"></textarea>
+
+        <div class="flex flex-wrap gap-4">
+          <button type="submit" class="btn-h9 btn-primary md:max-w-xs">Salvar cliente próprio</button>
+          <button type="button" data-target="brokerCRM" class="btn-h9 btn-ghost md:max-w-xs">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- AGENDA -->
+  <section id="agendaSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-6xl mx-auto space-y-8">
+      <div class="glass-card p-8 md:p-10">
+        <span class="section-tag">Agenda</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Minha Agenda</h2>
+        <p class="text-white/75 mt-2">
+          Registre visitas, atualize status, gere feedback e desbloqueie propostas.
+        </p>
+      </div>
+
+      <article class="glass-card p-6 space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div>
+            <h3 class="font-premium text-2xl font-black uppercase">Apartamento 43 • Vila Nova Conceição</h3>
+            <p class="text-white/70">26/03/2026 às 14:30 • Proprietário: Marcelo Vieira</p>
+            <a href="#" class="text-hnOrange text-sm">Ver imóvel</a>
+          </div>
+
+          <div class="glass-card px-4 py-3 text-sm">
+            Status atual: <strong id="visitCurrentStatus">Agendada</strong>
+          </div>
+        </div>
+
+        <form id="visitRegisterForm" class="grid lg:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <select id="visitStatus" class="input-h9" required>
+              <option value="">Selecionar status final</option>
+              <option value="Realizada">Realizada</option>
+              <option value="Cancelada">Cancelada</option>
+            </select>
+
+            <textarea id="visitObservation" class="textarea-h9" placeholder="Observações da visita" required></textarea>
+            <textarea id="visitCommercialView" class="textarea-h9" placeholder="Impressão comercial / leitura do cliente"></textarea>
+          </div>
+
+          <div class="space-y-4">
+            <textarea id="visitInterest" class="textarea-h9" placeholder="Interesse do cliente / objeções"></textarea>
+            <textarea id="visitNextSteps" class="textarea-h9" placeholder="Próximos passos"></textarea>
+
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button type="submit" class="btn-h9 btn-primary md:max-w-xs">Registrar visita</button>
+              <button type="button" id="unlockProposalBtn" class="btn-h9 btn-outline md:max-w-xs opacity-50 pointer-events-none">
+                Enviar link de proposta
+              </button>
+            </div>
+          </div>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROPOSTA -->
+  <section id="proposalSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-6xl mx-auto glass-card p-8 md:p-10 space-y-8">
+      <div>
+        <span class="section-tag">Proposta</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Formalizar Proposta</h2>
+        <p class="text-white/75 mt-2">
+          Página liberada após registro da visita. Fluxo com trava de desconto e geração de minuta CCV.
+        </p>
+      </div>
+
+      <form id="proposalForm" class="grid lg:grid-cols-3 gap-8">
+        <div class="space-y-4">
+          <input id="proposalPropertyId" type="text" class="input-h9" placeholder="ID do imóvel" />
+          <input id="proposalPropertyTitle" type="text" class="input-h9" placeholder="Título do imóvel" />
+          <input id="proposalPropertyUrl" type="text" class="input-h9" placeholder="URL do imóvel" />
+          <input id="proposalListPrice" type="text" class="input-h9" placeholder="Preço pedido" required />
+          <input id="proposalValue" type="text" class="input-h9" placeholder="Valor da proposta" required />
+        </div>
+
+        <div class="space-y-4">
+          <input id="proposalClientName" type="text" class="input-h9" placeholder="Nome do cliente" required />
+          <input id="proposalClientPhone" type="text" class="input-h9" placeholder="Telefone do cliente" required />
+          <input id="proposalClientEmail" type="email" class="input-h9" placeholder="E-mail do cliente" required />
+          <textarea id="proposalNotes" class="textarea-h9" placeholder="Observações da proposta"></textarea>
+        </div>
+
+        <div class="space-y-4">
+          <div class="glass-card p-5 space-y-3">
+            <h3 class="font-black uppercase text-hnOrange">Forma de pagamento</h3>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="paymentOwn" /> Recursos próprios</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="paymentFinance" /> Financiamento</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="paymentFgts" /> FGTS</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="paymentConsortium" /> Carta de consórcio</label>
+          </div>
+
+          <div class="glass-card p-5">
+            <h3 class="font-black uppercase text-hnOrange mb-3">Fluxo interno</h3>
+            <div id="proposalFlow" class="space-y-2 text-sm text-white/75">
+              <p>Sinal 6% na assinatura do CCV</p>
+              <p>+ 14% em até 30 dias</p>
+              <p>Saldo final na esteira de compra</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 grid md:grid-cols-2 gap-6 items-start">
+          <div class="glass-card p-5 space-y-3">
+            <p><strong>Status:</strong> <span id="proposalStatus">Aguardando análise</span></p>
+            <p><strong>Desconto:</strong> <span id="proposalDiscount">0,00%</span></p>
+            <p id="proposalApprovalText" class="text-white/70">Preencha os dados e envie a proposta.</p>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <button type="submit" class="btn-h9 btn-primary">Analisar proposta</button>
+            <button type="button" id="btnGenerateCCV" class="btn-h9 btn-outline opacity-50 pointer-events-none">
+              Gerar Minuta CCV
+            </button>
+            <button type="button" id="btnManagerApproval" class="btn-h9 btn-outline hidden">
+              Falar com o gestor
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolioSection" class="hidden-section w-full">
+    <div class="page-shell pt-10">
+      <div class="mb-8">
+        <span class="section-tag">Portfólio House Nove</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase mb-3">Busca inicial</h2>
+      </div>
+
+      <div class="portfolio-layout">
+        <aside class="sticky-panel">
+          <div class="glass-card p-6 space-y-6">
+            <div>
+              <h3 class="font-premium font-black uppercase mb-4">Filtros</h3>
+              <div class="filter-pills mb-5">
+                <span class="filter-pill">Onde</span>
+                <span class="filter-pill">O quê</span>
+                <span class="filter-pill">Quanto</span>
+                <span class="filter-pill">Diferenciais</span>
+                <span class="filter-pill">Curadoria H9</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <select id="filtroBairro" class="select-h9">
+                <option value="">Bairro</option>
+                <option value="Bela Vista">Bela Vista</option>
+                <option value="Higienópolis">Higienópolis</option>
+                <option value="Consolação">Consolação</option>
+                <option value="Paraíso">Paraíso</option>
+                <option value="Pinheiros">Pinheiros</option>
+                <option value="Paulista">Paulista</option>
+                <option value="Vila Nova Conceição">Vila Nova Conceição</option>
+              </select>
+
+              <select id="filtroMetro" class="select-h9">
+                <option value="">Proximidade ao metrô</option>
+                <option value="sim">Sim</option>
+                <option value="500m">Até 500m</option>
+              </select>
+
+              <select id="filtroTipo" class="select-h9">
+                <option value="">Tipo de imóvel</option>
+                <option value="Apartamento">Apartamento</option>
+                <option value="Studio">Studio</option>
+                <option value="Casa">Casa</option>
+                <option value="Garden">Garden</option>
+                <option value="Cobertura">Cobertura</option>
+              </select>
+
+              <select id="filtroDormitorios" class="select-h9">
+                <option value="">Dormitórios</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </select>
+
+              <select id="filtroSuites" class="select-h9">
+                <option value="">Suítes</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+              </select>
+
+              <select id="filtroVagas" class="select-h9">
+                <option value="">Vagas de garagem</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2+</option>
+              </select>
+
+              <input type="number" id="filtroValor" class="input-h9" placeholder="Valor máximo de venda" />
+              <input type="number" id="filtroCondominio" class="input-h9" placeholder="Valor do condomínio" />
+              <input type="number" id="filtroIptu" class="input-h9" placeholder="Valor do IPTU" />
+
+              <select id="filtroLazer" class="select-h9">
+                <option value="">Lazer no prédio</option>
+                <option value="Piscina">Piscina</option>
+                <option value="Academia">Academia</option>
+                <option value="Salão de Festas">Salão de Festas</option>
+                <option value="Coworking">Coworking</option>
+              </select>
+
+              <input type="number" id="filtroMetragem" class="input-h9" placeholder="Metragem mínima (m²)" />
+
+              <select id="filtroAndar" class="select-h9">
+                <option value="">Andar</option>
+                <option value="Baixo">Baixo</option>
+                <option value="Médio">Médio</option>
+                <option value="Alto">Alto</option>
+              </select>
+
+              <select id="filtroCuradoria" class="select-h9">
+                <option value="">Curadoria House Nove</option>
+                <option value="sim">Mostrar apenas curados por nós</option>
+              </select>
+
+              <button type="button" id="applyFilters" class="btn-h9 btn-primary">Aplicar</button>
+              <button type="button" id="clearFilters" class="btn-h9 btn-ghost">Limpar</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="space-y-6">
+          <div class="glass-card p-5">
+            <h3 class="font-premium text-xl font-black uppercase mb-4">Mapa de São Paulo</h3>
+            <div class="glass-card map-card">
+              <svg class="map-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa estilizado de São Paulo com pin da House Nove na Praça da Sé">
+                <defs>
+                  <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+                    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                  </pattern>
+                </defs>
+                <rect x="0" y="0" width="900" height="420" fill="rgba(22,8,36,0.76)"/>
+                <rect x="0" y="0" width="900" height="420" fill="url(#grid)"/>
+                <path d="M120 92 C220 54, 336 60, 410 130 S580 230, 720 208" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path d="M160 270 C270 212, 390 222, 495 268 S640 326, 760 300" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path d="M300 70 C318 145, 336 205, 356 348" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <path d="M520 84 C500 160, 480 230, 452 360" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+                <circle cx="448" cy="208" r="16" fill="#ff9600" stroke="#ffffff" stroke-width="6"/>
+                <circle cx="448" cy="208" r="36" fill="none" stroke="rgba(255,150,0,0.22)" stroke-width="2"/>
+                <circle cx="448" cy="208" r="60" fill="none" stroke="rgba(255,150,0,0.12)" stroke-width="2"/>
+
+                <g transform="translate(360 116)">
+                  <rect x="0" y="0" rx="16" ry="16" width="176" height="50" fill="rgba(15,8,28,0.86)" stroke="rgba(255,255,255,0.12)"/>
+                  <text x="16" y="22" fill="#ffffff" font-size="12" font-family="Inter" font-weight="700">H9 • Praça da Sé</text>
+                  <text x="16" y="37" fill="rgba(255,255,255,0.68)" font-size="11" font-family="Inter">Marco Zero de São Paulo</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div id="portfolioGrid" class="portfolio-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faqSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-premium text-3xl md:text-5xl font-black text-center mb-10 uppercase">Perguntas Frequentes</h2>
+
+      <div id="faqContainer"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="aboutSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-5xl mx-auto text-center space-y-8">
+      <h2 class="font-premium text-4xl md:text-5xl font-black uppercase">Quem Somos</h2>
+
+      <div class="glass-card p-8 md:p-10 text-left space-y-6">
+        <div>
+          <h3 class="text-hnOrange font-black mb-4 uppercase text-xl">O manifesto</h3>
+          <p class="leading-8 text-white/82">
+            No mercado imobiliário atual, clientes foram reduzidos a IDs e processos foram automatizados
+            ao ponto de perderem a alma. A House Nove nasceu para quebrar esse ciclo. Unimos o rigor técnico,
+            o compliance jurídico e a leitura estratégica de negócio de Amaury com a visão de marca,
+            posicionamento e experiência de Ana Carolina para criar uma jornada mais clara, mais humana e mais inteligente.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-hnOrange font-black mb-4 uppercase text-xl">Nossa missão</h3>
+          <p class="leading-8 text-white/82">
+            Não somos apenas uma imobiliária. Somos Personal Shoppers imobiliários. Filtramos o excesso de informação,
+            visitamos, avaliamos, comparamos, organizamos e conduzimos com segurança. A nossa missão é transformar
+            a busca, a venda e a negociação de um imóvel em uma jornada assistida, premium e previsível.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h4 class="font-black uppercase text-sm text-hnOrange mb-2">Curadoria real</h4>
+            <p class="text-white/75 leading-7 text-sm">
+              Não empilhamos opções. Selecionamos o que faz sentido para a vida, para o momento e para o investimento do cliente.
+            </p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h4 class="font-black uppercase text-sm text-hnOrange mb-2">Segurança</h4>
+            <p class="text-white/75 leading-7 text-sm">
+              Estruturamos processos com compliance, documentação, leitura contratual e acompanhamento técnico para dar segurança ao negócio.
+            </p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h4 class="font-black uppercase text-sm text-hnOrange mb-2">Atendimento boutique</h4>
+            <p class="text-white/75 leading-7 text-sm">
+              A House Nove une agilidade digital com relação humana. Atendimento de boutique, sem perder escala, precisão e rastreabilidade.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-hnOrange font-black mb-4 uppercase text-xl">O diferencial House Nove</h3>
+          <p class="leading-8 text-white/82">
+            Trabalhamos com portfólio próprio e também com as maiores proptechs, sem abrir mão do atendimento humano.
+            Isso significa que o cliente pode ter a tecnologia das grandes plataformas com a leitura crítica, a curadoria,
+            a condução estratégica e o acompanhamento premium de quem conhece São Paulo, entende posicionamento e protege a transação.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-hnOrange font-black mb-4 uppercase text-xl">Onde atuamos</h3>
+          <p class="leading-8 text-white/82">
+            Temos foco premium em São Paulo, especialmente em bairros como Higienópolis, Bela Vista, Consolação, Paraíso,
+            Pinheiros, Paulista e entornos relevantes para o perfil de cliente que valoriza liquidez, mobilidade e contexto urbano.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT -->
+  <section id="recruitmentSection" class="hidden-section w-full px-6 py-12">
+    <div class="max-w-5xl mx-auto glass-card p-8 md:p-10 space-y-8">
+      <div class="text-center space-y-3">
+        <span class="section-tag">Carreiras</span>
+        <h2 class="font-premium text-3xl md:text-5xl font-black uppercase">Trabalhe Conosco</h2>
+        <p class="text-white/75 max-w-3xl mx-auto">
+          Procuramos pessoas com repertório comercial, senso de excelência, postura consultiva
+          e vontade real de construir uma marca premium no mercado imobiliário.
+        </p>
+      </div>
+
+      <form id="recruitmentForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="recruitName" type="text" class="input-h9" placeholder="Nome completo" required />
+          <input id="recruitEmail" type="email" class="input-h9" placeholder="E-mail" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="recruitPhone" type="tel" class="input-h9" placeholder="Celular" required />
+          <input id="recruitEducation" type="text" class="input-h9" placeholder="Escolaridade" required />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="recruitCourse" type="text" class="input-h9" placeholder="Se fez faculdade, qual curso?" />
+          <input id="recruitRole" type="text" class="input-h9" placeholder="Vaga de interesse" required />
+        </div>
+
+        <textarea id="recruitDifferential" class="textarea-h9" placeholder="Por que quer trabalhar na House Nove e como pode agregar?" required></textarea>
+
+        <div class="flex flex-wrap gap-4">
+          <button type="submit" class="btn-h9 btn-primary md:max-w-xs">Enviar candidatura</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="w-full py-12 bg-hnDark/80 border-t border-white/5 mt-auto px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="footer-grid mb-10">
+        <div class="footer-brand">
+          <img src="logo vertical 1.png" alt="House Nove" class="h-16 opacity-80" />
+        </div>
+
+        <div>
+          <h4 class="footer-title">Menu</h4>
+          <div class="flex flex-col gap-3">
+            <button data-target="portfolio" class="footer-link">Buscar Imóveis</button>
+            <button data-target="simulator" class="footer-link">Simular Financiamento</button>
+            <button data-target="about" class="footer-link">Quem Somos</button>
+            <button data-target="faq" class="footer-link">FAQ</button>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Corretores</h4>
+          <div class="flex flex-col gap-3">
+            <button data-target="loginBroker" class="footer-link">Cadastrar Imóvel</button>
+            <button data-target="loginBroker" class="footer-link">CRM do Corretor</button>
+            <a href="https://inteligenciaimobiliaria.com.br/" target="_blank" rel="noopener noreferrer" class="footer-link">Inteligência Imobiliária</a>
+            <button data-target="recruitment" class="footer-link">Trabalhe Conosco</button>
+          </div>
+        </div>
+
+        <div class="footer-legal">
+          <p>CNPJ: 50.614.365/0001-84 | CRECI-SP: 043497-J</p>
+          <p>Av. Chucri Zaidan, 1550 cj 1808 | São Paulo</p>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6">
+        <div class="trust-footer-row">
+          <div class="social-bar" aria-label="Redes sociais House Nove">
+            <a id="socialFacebook" class="social-link hidden-section" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a id="socialInstagram" class="social-link hidden-section" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a id="socialTikTok" class="social-link hidden-section" href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a id="socialLinkedIn" class="social-link hidden-section" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a id="socialYouTube" class="social-link hidden-section" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+
+          <div class="trust-bar">
+            <span class="trust-badge"><i class="fas fa-shield-alt text-hnOrange"></i> Ambiente Seguro</span>
+            <span class="trust-badge"><i class="fas fa-star text-hnOrange"></i> Reclame Aqui</span>
+            <span class="trust-badge"><i class="fas fa-brain text-hnOrange"></i> AI Powered by OpenAI</span>
+            <span class="trust-badge"><i class="fas fa-id-badge text-hnOrange"></i> CRECI-SP Oficial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const DEFAULT_BROKER_LOGIN = "MAUSHMELLOW";
+      const DEFAULT_BROKER_PASSWORD = "Apartamento43";
+      const EDUARDO_WHATS = "5511976022147";
+      const EDUARDO_GREETING = "Olá Eduardo, fiz a simulação de financiamento no site da House Nove, pode me auxiliar no próximo passo?";
+      const SOCIAL_FACEBOOK = "";
+      const SOCIAL_INSTAGRAM = "";
+      const SOCIAL_TIKTOK = "";
+      const SOCIAL_LINKEDIN = "";
+      const SOCIAL_YOUTUBE = "";
+
+      const state = {
+        brokerAuthenticated: false,
+        proposalUnlocked: false,
+        historyStack: ["home"],
+      };
+
+      const sections = {
+        home: document.getElementById("homeSection"),
+        buyerForm: document.getElementById("buyerFormSection"),
+        buyerThankYou: document.getElementById("buyerThankYouSection"),
+        simulator: document.getElementById("simulatorSection"),
+        loginBroker: document.getElementById("loginBrokerSection"),
+        brokerCRM: document.getElementById("brokerCRMSection"),
+        capture: document.getElementById("captureSection"),
+        ownClient: document.getElementById("ownClientSection"),
+        agenda: document.getElementById("agendaSection"),
+        proposal: document.getElementById("proposalSection"),
+        portfolio: document.getElementById("portfolioSection"),
+        faq: document.getElementById("faqSection"),
+        about: document.getElementById("aboutSection"),
+        recruitment: document.getElementById("recruitmentSection"),
+      };
+
+      const portfolioItems = [
+        {
+          id: 1,
+          titulo: "Apartamento em Pinheiros",
+          bairro: "Pinheiros",
+          valor: 1450000,
+          dormitorios: 2,
+          suites: 1,
+          vagas: 1,
+          metro: "500m",
+          tipo: "Apartamento",
+          condominio: 1250,
+          iptu: 420,
+          lazer: "Academia",
+          metragem: 84,
+          andar: "Médio",
+          curadoria: true,
+          tag: "Curadoria H9"
+        },
+        {
+          id: 2,
+          titulo: "Casa no Itaim Bibi",
+          bairro: "Itaim",
+          valor: 2280000,
+          dormitorios: 3,
+          suites: 2,
+          vagas: 2,
+          metro: "sim",
+          tipo: "Casa",
+          condominio: 0,
+          iptu: 890,
+          lazer: "Piscina",
+          metragem: 160,
+          andar: "Baixo",
+          curadoria: false,
+          tag: "Exclusivo"
+        },
+        {
+          id: 3,
+          titulo: "Apartamento 43 • Vila Nova Conceição",
+          bairro: "Vila Nova Conceição",
+          valor: 2890000,
+          dormitorios: 3,
+          suites: 2,
+          vagas: 2,
+          metro: "500m",
+          tipo: "Apartamento",
+          condominio: 2450,
+          iptu: 980,
+          lazer: "Coworking",
+          metragem: 148,
+          andar: "Alto",
+          curadoria: true,
+          tag: "Premium"
+        },
+        {
+          id: 4,
+          titulo: "Studio na Consolação",
+          bairro: "Consolação",
+          valor: 780000,
+          dormitorios: 1,
+          suites: 1,
+          vagas: 0,
+          metro: "sim",
+          tipo: "Studio",
+          condominio: 680,
+          iptu: 180,
+          lazer: "Academia",
+          metragem: 38,
+          andar: "Médio",
+          curadoria: true,
+          tag: "H9 Validado"
+        }
+      ];
+
+      const faqItems = [
+        {
+          q: "O que é um Personal Shopper Imobiliário?",
+          a: "É um consultor focado exclusivamente nos interesses do comprador. A House Nove faz a curadoria, visita antes de você, organiza contexto, filtra ruído e conduz a negociação com visão estratégica, poupando tempo e evitando ciladas."
+        },
+        {
+          q: "A House Nove cobra alguma taxa extra do comprador?",
+          a: "Não. O trabalho de curadoria e acompanhamento é remunerado pela partilha de comissão padrão do mercado imobiliário, sem taxa adicional escondida para o comprador."
+        },
+        {
+          q: "Como vocês garantem a segurança jurídica da venda?",
+          a: "Através de processo de compliance, leitura documental, análise de certidões, estruturação de minutas e acompanhamento técnico da operação antes de qualquer formalização relevante."
+        },
+        {
+          q: "Posso comprar imóveis do QuintoAndar através da House Nove?",
+          a: "Sim. A House Nove pode atuar sobre imóveis de grandes proptechs e parceiros, combinando a tecnologia dessas plataformas com atendimento humano, curadoria e leitura estratégica do negócio."
+        },
+        {
+          q: "Como funciona a trava de 10% nas propostas?",
+          a: "É um mecanismo de segurança operacional. Propostas com desconto superior a 10% passam por análise direta do gestor para garantir viabilidade comercial e proteger a negociação."
+        },
+        {
+          q: "O simulador de Poder de Compra é preciso?",
+          a: "Ele utiliza a lógica bancária de comprometimento de até 30% da renda líquida e a exigência mínima de 20% de entrada para gerar uma estimativa realista, não uma promessa de crédito."
+        },
+        {
+          q: "Quem é Eduardo Murena no sistema?",
+          a: "Eduardo é o especialista em crédito imobiliário que recebe os dados das simulações para acelerar o entendimento do caso, esclarecer dúvidas e apoiar a jornada de financiamento."
+        },
+        {
+          q: "Quais bairros a House Nove atende em São Paulo?",
+          a: "Há foco premium em bairros como Higienópolis, Bela Vista, Consolação, Paraíso, Pinheiros, Paulista e regiões correlatas que façam sentido para o perfil do cliente."
+        },
+        {
+          q: "O que é o fluxo 6/14/80?",
+          a: "É o padrão sugerido de pagamento na proposta: 6% de sinal na assinatura do CCV, 14% em até 30 dias e os 80% restantes via recursos próprios, financiamento, FGTS ou carta de consórcio."
+        },
+        {
+          q: "Como faço para anunciar meu imóvel com vocês?",
+          a: "Basta preencher a seção de Proprietários no site. A equipe da House Nove faz uma leitura inicial, avalia fit com o portfólio e entra em contato para aprofundar a captação."
+        },
+        {
+          q: "A House Nove possui registro no CRECI? Quem fiscaliza vocês?",
+          a: "Sim. A House Nove opera com registro no CRECI-SP sob o nº 043497-J. O CRECI é o órgão que fiscaliza o exercício profissional no setor."
+        },
+        {
+          q: "Como a LGPD protege meus dados pessoais ao preencher um formulário?",
+          a: "Os dados são coletados para finalidades específicas de atendimento imobiliário, não para revenda indiscriminada. O cliente pode solicitar revisão, correção ou exclusão conforme a LGPD."
+        },
+        {
+          q: "O Código de Defesa do Consumidor se aplica à intermediação imobiliária?",
+          a: "Sim. A House Nove trata a relação com transparência, clareza contratual, informação adequada e responsabilidade técnica, em linha com o CDC."
+        },
+        {
+          q: "Se eu desistir da compra após pagar o sinal, eu perco o dinheiro?",
+          a: "Isso depende do que estiver regulado em contrato e das regras de arras no Código Civil. A House Nove trabalha para deixar o CCV claro antes do pagamento."
+        },
+        {
+          q: "O que acontece se o imóvel apresentar vícios ocultos?",
+          a: "O vendedor responde por vícios ocultos nos termos do Código Civil. A curadoria e a leitura técnica da House Nove ajudam a mapear riscos antes da compra."
+        },
+        {
+          q: "Qual a responsabilidade do corretor se a documentação do imóvel tiver problemas?",
+          a: "O corretor deve prestar esclarecimentos sobre a segurança do negócio. Na House Nove, isso é reforçado com compliance documental antes de formalizações centrais."
+        },
+        {
+          q: "A taxa de corretagem é obrigatória? Quem deve pagar?",
+          a: "A corretagem é devida por quem contrata o serviço, embora possa haver arranjos específicos entre as partes. O ponto central da House Nove é transparência desde o início."
+        },
+        {
+          q: "Como posso confirmar se o corretor que me atende está regularizado?",
+          a: "Você pode consultar o registro do corretor e o CNPJ da House Nove no CRECI-SP. Isso é uma medida básica e saudável de segurança."
+        },
+        {
+          q: "O que é o COAF e por que a imobiliária faz comunicações a ele?",
+          a: "Imobiliárias podem ser obrigadas por lei a comunicar operações enquadradas em critérios de prevenção à lavagem de dinheiro. Isso reforça legalidade e ética da transação."
+        },
+        {
+          q: "Quais os prazos de garantia para imóveis usados vs. imóveis novos?",
+          a: "Imóveis novos têm garantias estruturais próprias do regime de incorporação/construção. Imóveis usados são vendidos no estado em que se encontram, mas defeitos graves não informados podem gerar responsabilidade."
+        }
+      ];
+
+      function $(selector, scope = document) {
+        return scope.querySelector(selector);
+      }
+
+      function showSection(name, pushHistory = true) {
+        Object.values(sections).forEach(section => section.classList.add("hidden-section"));
+        sections[name].classList.remove("hidden-section");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        const backBtn = $("#globalBackBtn");
+        backBtn.style.display = name === "home" ? "none" : "inline-flex";
+
+        if (pushHistory) {
+          const last = state.historyStack[state.historyStack.length - 1];
+          if (last !== name) state.historyStack.push(name);
+        }
+      }
+
+      function goBack() {
+        if (state.historyStack.length <= 1) {
+          showSection("home", false);
+          return;
+        }
+        state.historyStack.pop();
+        const previous = state.historyStack[state.historyStack.length - 1] || "home";
+        showSection(previous, false);
+      }
+
+      function makePayload(type, table, data, extra = {}) {
+        return {
+          type,
+          table,
+          data,
+          ...extra
+          // TODO: Webhook Make.com
+        };
+      }
+
+      function toNumber(value) {
+        return Number(String(value || "").replace(/\D/g, "")) || 0;
+      }
+
+      function formatBRL(value) {
+        return new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        }).format(Number(value || 0));
+      }
+
+      function configureSocialLink(id, url) {
+        const link = document.getElementById(id);
+        if (!link) return;
+        if (!url) {
+          link.classList.add("hidden-section");
+          link.removeAttribute("href");
+          return;
+        }
+        link.href = url;
+        link.classList.remove("hidden-section");
+      }
+
+      function calculateSimulatorValues() {
+        const renda = Number($("#simIncome")?.value || 0);
+        const entrada = Number($("#simDownPayment")?.value || 0);
+        const prazo = Number($("#simTerm")?.value || 0);
+
+        if (!renda || !entrada || !prazo) return null;
+
+        const parcelaMaxima = renda * 0.3;
+        const fatorFinanciamento = Math.min(0.8, prazo / 450);
+        const financiamentoEstimado = fatorFinanciamento > 0 ? parcelaMaxima * prazo * 0.55 : 0;
+        const imovelEstimado = financiamentoEstimado > 0 ? entrada + financiamentoEstimado : 0;
+        const entradaMinima = imovelEstimado > 0 ? imovelEstimado * 0.2 : 0;
+
+        return {
+          renda,
+          entrada,
+          prazo,
+          parcelaMaxima,
+          financiamentoEstimado,
+          imovelEstimado,
+          entradaMinima
+        };
+      }
+
+      function buildSimulatorWhatsappMessage(values) {
+        const nome = $("#simName").value;
+        const telefone = $("#simPhone").value;
+        const email = $("#simEmail").value;
+
+        return [
+          EDUARDO_GREETING,
+          "",
+          "Dados do cliente:",
+          `Nome: ${nome}`,
+          `WhatsApp: ${telefone}`,
+          `E-mail: ${email}`,
+          `Renda mensal: ${formatBRL(values.renda)}`,
+          `Entrada disponível: ${formatBRL(values.entrada)}`,
+          `Prazo desejado: ${values.prazo} meses`,
+          "",
+          "Resumo da simulação:",
+          `Parcela estimada: ${formatBRL(values.parcelaMaxima)}`,
+          `Financiamento estimado: ${formatBRL(values.financiamentoEstimado)}`,
+          `Valor estimado do imóvel: ${formatBRL(values.imovelEstimado)}`,
+          `Entrada mínima de referência (20%): ${formatBRL(values.entradaMinima)}`
+        ].join("\n");
+      }
+
+      function renderPortfolio(items) {
+        const grid = $("#portfolioGrid");
+        grid.innerHTML = items.map(item => `
+          <div class="glass-card overflow-hidden">
+            <div class="property-card-image"></div>
+            <div class="p-5">
+              <span class="property-pill">${item.tag}</span>
+              <h4 class="font-black mt-3 uppercase">${item.titulo}</h4>
+              <p class="text-white/65 text-sm">${item.bairro} • ${item.dormitorios} dormitórios • ${item.metragem}m²</p>
+              <p class="text-hnOrange font-black text-xl mt-2">${formatBRL(item.valor / 100)}</p>
+              <div class="grid grid-cols-2 gap-2 mt-4 text-xs text-white/70">
+                <span>Suítes: ${item.suites}</span>
+                <span>Vagas: ${item.vagas}</span>
+                <span>Metrô: ${item.metro}</span>
+                <span>Andar: ${item.andar}</span>
+              </div>
+              <button class="btn-h9 btn-outline mt-4 py-2">Ver detalhes</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function getFilteredPortfolio() {
+        const bairro = $("#filtroBairro").value;
+        const metro = $("#filtroMetro").value;
+        const tipo = $("#filtroTipo").value;
+        const dormitorios = Number($("#filtroDormitorios").value || 0);
+        const suites = Number($("#filtroSuites").value || 0);
+        const vagas = Number($("#filtroVagas").value || 0);
+        const valor = Number($("#filtroValor").value || 0);
+        const condominio = Number($("#filtroCondominio").value || 0);
+        const iptu = Number($("#filtroIptu").value || 0);
+        const lazer = $("#filtroLazer").value;
+        const metragem = Number($("#filtroMetragem").value || 0);
+        const andar = $("#filtroAndar").value;
+        const curadoria = $("#filtroCuradoria").value;
+
+        return portfolioItems.filter(item => {
+          if (bairro && item.bairro !== bairro) return false;
+          if (metro && item.metro !== metro) return false;
+          if (tipo && item.tipo !== tipo) return false;
+          if (dormitorios && item.dormitorios < dormitorios) return false;
+          if (suites && item.suites < suites) return false;
+          if (vagas && item.vagas < vagas) return false;
+          if (valor && item.valor > valor) return false;
+          if (condominio && item.condominio > condominio) return false;
+          if (iptu && item.iptu > iptu) return false;
+          if (lazer && item.lazer !== lazer) return false;
+          if (metragem && item.metragem < metragem) return false;
+          if (andar && item.andar !== andar) return false;
+          if (curadoria === "sim" && !item.curadoria) return false;
+          return true;
+        });
+      }
+
+      function renderFAQ() {
+        const container = $("#faqContainer");
+        container.innerHTML = faqItems.map(item => `
+          <div class="faq-item">
+            <button class="faq-question">
+              ${item.q}
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">${item.a}</div>
+            </div>
+          </div>
+        `).join("");
+
+        container.querySelectorAll(".faq-question").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const ans = btn.nextElementSibling;
+            ans.style.maxHeight = ans.style.maxHeight ? null : ans.scrollHeight + "px";
+          });
+        });
+      }
+
+      configureSocialLink("socialFacebook", SOCIAL_FACEBOOK);
+      configureSocialLink("socialInstagram", SOCIAL_INSTAGRAM);
+      configureSocialLink("socialTikTok", SOCIAL_TIKTOK);
+      configureSocialLink("socialLinkedIn", SOCIAL_LINKEDIN);
+      configureSocialLink("socialYouTube", SOCIAL_YOUTUBE);
+
+      document.querySelectorAll("[data-target]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-target");
+
+          if ((target === "brokerCRM" || target === "capture" || target === "ownClient" || target === "agenda") && !state.brokerAuthenticated) {
+            showSection("loginBroker");
+            return;
+          }
+
+          if (target === "proposal") {
+            if (!state.brokerAuthenticated) {
+              showSection("loginBroker");
+              return;
+            }
+            if (!state.proposalUnlocked) {
+              alert("A proposta será liberada após o registro da visita.");
+              return;
+            }
+          }
+
+          if (target === "portfolio") renderPortfolio(portfolioItems);
+          if (target === "faq") renderFAQ();
+          showSection(target);
+        });
+      });
+
+      $("#globalBackBtn").addEventListener("click", goBack);
+
+      $("#openBuyerFlow").addEventListener("click", () => showSection("buyerForm"));
+      $("#openSimulatorFlow").addEventListener("click", () => showSection("simulator"));
+
+      $("#goPortfolioNow").addEventListener("click", () => {
+        renderPortfolio(portfolioItems);
+        showSection("portfolio");
+      });
+
+      $("#applyFilters").addEventListener("click", () => renderPortfolio(getFilteredPortfolio()));
+
+      $("#clearFilters").addEventListener("click", () => {
+        [
+          "filtroBairro","filtroMetro","filtroTipo","filtroDormitorios","filtroSuites","filtroVagas",
+          "filtroValor","filtroCondominio","filtroIptu","filtroLazer","filtroMetragem","filtroAndar","filtroCuradoria"
+        ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ""; });
+        renderPortfolio(portfolioItems);
+      });
+
+      $("#sellerLeadForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const payload = makePayload("seller_lead", "Proprietarios", {
+          nome: $("#sellerNome").value,
+          telefone: $("#sellerTelefone").value,
+          bairro: $("#sellerBairro").value,
+          email: $("#sellerEmail").value
+        });
+
+        console.log("SELLER_LEAD_PAYLOAD", payload);
+        alert("Recebemos seus dados. A House Nove entrará em contato.");
+        this.reset();
+      });
+
+      $("#buyerLeadForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const payload = makePayload("buyer_personal_lead", "Compradores", {
+          nome: $("#buyerNome").value,
+          email: $("#buyerEmail").value,
+          celular: $("#buyerCelular").value,
+          jornada: $("#buyerJornada").value,
+          observacoes: $("#buyerObs").value
+        });
+
+        console.log("BUYER_PERSONAL_PAYLOAD", payload);
+        showSection("buyerThankYou");
+
+        setTimeout(() => {
+          renderPortfolio(portfolioItems);
+          showSection("portfolio");
+        }, 2200);
+      });
+
+      $("#simulatorForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const values = calculateSimulatorValues();
+        if (!values) {
+          alert("Preencha renda, entrada e prazo para calcular a simulação.");
+          return;
+        }
+
+        $("#resultInstallment").textContent = formatBRL(values.parcelaMaxima);
+        $("#resultFinance").textContent = formatBRL(values.financiamentoEstimado);
+        $("#resultProperty").textContent = formatBRL(values.imovelEstimado);
+        $("#resultSummary").textContent =
+          `Com renda de ${formatBRL(values.renda)}, a parcela mensal estimada fica em ${formatBRL(values.parcelaMaxima)}. ` +
+          `Considerando ${values.prazo} meses e entrada de ${formatBRL(values.entrada)}, o valor estimado do imóvel pode chegar a ${formatBRL(values.imovelEstimado)}. ` +
+          `Como referência, a entrada mínima de 20% seria ${formatBRL(values.entradaMinima)}.`;
+
+        $("#simulatorResult").classList.remove("hidden-section");
+        $("#sendSimulatorWhats").classList.remove("hidden-section");
+
+        const payload = makePayload("purchase_power_simulation", "PoderDeCompra", {
+          nome: $("#simName").value,
+          telefone: $("#simPhone").value,
+          email: $("#simEmail").value,
+          renda: values.renda,
+          entrada: values.entrada,
+          prazo: values.prazo,
+          parcelaEstimada: values.parcelaMaxima,
+          financiamentoEstimado: values.financiamentoEstimado,
+          imovelEstimado: values.imovelEstimado,
+          entradaMinima: values.entradaMinima
+        });
+
+        console.log("SIMULATOR_PAYLOAD", payload);
+      });
+
+      $("#sendSimulatorWhats").addEventListener("click", () => {
+        const values = calculateSimulatorValues();
+        if (!values) {
+          alert("Calcule a simulação antes de enviar para o Eduardo.");
+          return;
+        }
+
+        const message = buildSimulatorWhatsappMessage(values);
+        const url = `https://wa.me/${EDUARDO_WHATS}?text=${encodeURIComponent(message)}`;
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+
+      $("#brokerLoginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const login = $("#brokerLoginEmail").value.trim();
+        const password = $("#brokerLoginPassword").value.trim();
+        const feedback = $("#brokerLoginFeedback");
+
+        if (login.toUpperCase() !== DEFAULT_BROKER_LOGIN || password !== DEFAULT_BROKER_PASSWORD) {
+          feedback.textContent = "Login ou senha inválidos.";
+          return;
+        }
+
+        state.brokerAuthenticated = true;
+        feedback.textContent = "Login realizado com sucesso.";
+
+        const payload = makePayload("broker_login", "Corretores", {
+          login,
+          loggedAt: new Date().toISOString()
+        });
+
+        console.log("BROKER_LOGIN_PAYLOAD", payload);
+
+        setTimeout(() => showSection("brokerCRM"), 300);
+      });
+
+      const qaReminder = $("#qaReminder");
+      document.querySelectorAll('input[name="qaStatus"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+          qaReminder.style.display = radio.value === "nao" && radio.checked ? "block" : "none";
+        });
+      });
+
+      $("#generateDescriptionBtn").addEventListener("click", () => {
+        const bairro = $("#captureDistrict").value || "bairro nobre";
+        const dorms = $("#captureBedrooms").value || "x";
+        const metragem = $("#captureArea").value || "x";
+        const lazer = $("#captureAmenities").value || "lazer completo";
+
+        $("#captureDescription").value =
+          `Imóvel com ${metragem}m², ${dorms} dormitórios, localizado em ${bairro}. Destaque para a configuração funcional, excelente potencial de posicionamento e ${lazer}. Curadoria House Nove com foco em narrativa comercial clara, premium e orientada à conversão.`;
+      });
+
+      $("#captureForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const qaSelected = document.querySelector('input[name="qaStatus"]:checked');
+
+        const payload = makePayload("property_capture", "Imoveis", {
+          domain: "imoveis",
+          qaStatus: qaSelected ? qaSelected.value : "",
+          cep: $("#captureCep").value,
+          numero: $("#captureAddressNumber").value,
+          bairro: $("#captureDistrict").value,
+          proprietario: $("#captureOwner").value,
+          telefoneProprietario: $("#captureOwnerPhone").value,
+          tipo: $("#captureType").value,
+          metragem: $("#captureArea").value,
+          dormitorios: $("#captureBedrooms").value,
+          suites: $("#captureSuites").value,
+          vagas: $("#captureParking").value,
+          valor: $("#capturePrice").value,
+          condominio: $("#captureCondo").value,
+          iptu: $("#captureIptu").value,
+          lazer: $("#captureAmenities").value,
+          midia: Array.from(document.querySelectorAll('input[name="captureMedia"]:checked')).map(el => el.value),
+          descricao: $("#captureDescription").value
+        });
+
+        console.log("CAPTURE_PAYLOAD", payload);
+        alert("Captação registrada com sucesso.");
+        this.reset();
+        qaReminder.style.display = "none";
+      });
+
+      $("#ownClientForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const payload = makePayload("own_client", "ClientesProprios", {
+          domain: "crm",
+          corretorId: "broker_house_nove",
+          nome: $("#ownClientName").value,
+          email: $("#ownClientEmail").value,
+          telefone: $("#ownClientPhone").value,
+          origem: $("#ownClientOrigin").value,
+          observacoes: $("#ownClientNotes").value
+        });
+
+        console.log("OWN_CLIENT_PAYLOAD", payload);
+        alert("Cliente próprio salvo com sucesso.");
+        this.reset();
+      });
+
+      $("#visitRegisterForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const status = $("#visitStatus").value;
+        $("#visitCurrentStatus").textContent = status || "Atualizado";
+
+        state.proposalUnlocked = true;
+        $("#unlockProposalBtn").classList.remove("opacity-50", "pointer-events-none");
+
+        const payload = makePayload("visit_register", "Visitas", {
+          domain: "agenda",
+          trigger: "send_feedback_link",
+          statusFinal: status,
+          observacao: $("#visitObservation").value,
+          impressaoComercial: $("#visitCommercialView").value,
+          interesseCliente: $("#visitInterest").value,
+          proximosPassos: $("#visitNextSteps").value,
+          imovel: "Apartamento 43 • Vila Nova Conceição"
+        });
+
+        console.log("VISIT_REGISTER_PAYLOAD", payload);
+        alert("Visita registrada com sucesso e proposta liberada.");
+      });
+
+      $("#unlockProposalBtn").addEventListener("click", () => {
+        if (!state.proposalUnlocked) return;
+        showSection("proposal");
+      });
+
+      $("#openProposalFromCRM").addEventListener("click", () => {
+        if (!state.proposalUnlocked) {
+          alert("A proposta será liberada após o registro da visita.");
+          return;
+        }
+        showSection("proposal");
+      });
+
+      $("#proposalForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const precoPedido = toNumber($("#proposalListPrice").value) / 100;
+        const valorProposta = toNumber($("#proposalValue").value) / 100;
+        const desconto = precoPedido > 0 ? ((precoPedido - valorProposta) / precoPedido) * 100 : 0;
+
+        const sinal = valorProposta * 0.06;
+        const segunda = valorProposta * 0.14;
+        const saldo = valorProposta - sinal - segunda;
+
+        $("#proposalFlow").innerHTML = `
+          <p><strong>6% na assinatura do CCV:</strong> ${formatBRL(sinal)}</p>
+          <p><strong>14% em até 30 dias:</strong> ${formatBRL(segunda)}</p>
+          <p><strong>Saldo da esteira:</strong> ${formatBRL(saldo)}</p>
+        `;
+
+        $("#proposalDiscount").textContent = `${desconto.toFixed(2)}%`;
+
+        if (desconto > 10) {
+          $("#proposalStatus").textContent = "Aguardando Aprovação do Gestor";
+          $("#proposalApprovalText").textContent = "Desconto acima de 10%. Minuta bloqueada até aprovação.";
+          $("#btnGenerateCCV").classList.add("opacity-50", "pointer-events-none");
+          $("#btnManagerApproval").classList.remove("hidden");
+        } else {
+          $("#proposalStatus").textContent = "Proposta apta para gerar Minuta CCV";
+          $("#proposalApprovalText").textContent = "Desconto dentro da alçada comercial.";
+          $("#btnGenerateCCV").classList.remove("opacity-50", "pointer-events-none");
+          $("#btnManagerApproval").classList.add("hidden");
+        }
+
+        const payload = makePayload("proposal_submit", "Propostas", {
+          domain: "propostas",
+          imovelId: $("#proposalPropertyId").value,
+          imovelTitulo: $("#proposalPropertyTitle").value,
+          imovelUrl: $("#proposalPropertyUrl").value,
+          precoPedido,
+          valorProposta,
+          desconto,
+          clienteNome: $("#proposalClientName").value,
+          clienteTelefone: $("#proposalClientPhone").value,
+          clienteEmail: $("#proposalClientEmail").value,
+          observacoes: $("#proposalNotes").value,
+          pagamento: {
+            recursosProprios: $("#paymentOwn").checked,
+            financiamento: $("#paymentFinance").checked,
+            fgts: $("#paymentFgts").checked,
+            cartaConsorcio: $("#paymentConsortium").checked
+          }
+        });
+
+        console.log("PROPOSAL_PAYLOAD", payload);
+      });
+
+      $("#btnGenerateCCV").addEventListener("click", function () {
+        if (this.classList.contains("pointer-events-none")) return;
+
+        const payload = makePayload("generate_ccv_minute", "CCV", {
+          domain: "propostas",
+          generatedAt: new Date().toISOString()
+        });
+
+        console.log("CCV_PAYLOAD", payload);
+        alert("Minuta CCV liberada para geração.");
+      });
+
+      $("#btnManagerApproval").addEventListener("click", function () {
+        const payload = makePayload("proposal_manager_approval_requested", "Propostas", {
+          status: "Aguardando Aprovação do Gestor",
+          requestedAt: new Date().toISOString()
+        });
+
+        console.log("MANAGER_APPROVAL_PAYLOAD", payload);
+        alert("Solicitação de aprovação enviada ao gestor.");
+      });
+
+      $("#recruitmentForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const payload = makePayload("recruitment_apply", "Candidaturas", {
+          domain: "rh",
+          nome: $("#recruitName").value,
+          email: $("#recruitEmail").value,
+          celular: $("#recruitPhone").value,
+          escolaridade: $("#recruitEducation").value,
+          curso: $("#recruitCourse").value,
+          vaga: $("#recruitRole").value,
+          diferencial: $("#recruitDifferential").value
+        });
+
+        console.log("RECRUITMENT_PAYLOAD", payload);
+        alert("Candidatura enviada com sucesso.");
+        this.reset();
+      });
+
+      renderPortfolio(portfolioItems);
+      renderFAQ();
+      showSection("home", false);
+    })();
+  </script>
+</body>
+</html>
